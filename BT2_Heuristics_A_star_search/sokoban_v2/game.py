@@ -12,7 +12,7 @@ from pyautogui import press, typewrite, hotkey
 import _thread
 import time
 
-start_level = 1
+start_level = 6
 
 def move( threadName, delay, strategy):
     for step in strategy:
@@ -25,7 +25,6 @@ def move( threadName, delay, strategy):
         if step in ['U','u']:
             press('up')
         # time.sleep(0.2)
-
 class Game:
     def __init__(self, window):
         self.window = window
@@ -75,7 +74,7 @@ class Game:
                 self.player.move(event.key, self.level, self.player_interface)
                 if self.has_win():
                     self.index_level += 1
-                    if (self.index_level > 18):
+                    if (self.index_level == 19):
                         self.index_level = 1
                     self.scores.save()
                     self.load_level()
@@ -116,9 +115,11 @@ class Game:
 
     def auto_move(self):
         # strategy = get_move(self.level.structure[:-1], self.level.position_player, 'dfs')
-        # strategy = get_move(self.level.structure[:-1], self.level.position_player, 'bfs')
-        strategy = get_move(self.level.structure[:-1], self.level.position_player, 'ucs')
-        
+        strategy = get_move(self.level.structure[:-1], self.level.position_player, 'bfs')
+        # strategy = get_move(self.level.structure[:-1], self.level.position_player, 'ucs')
+        # strategy = get_move(self.level.structure[:-1], self.level.position_player, 'astar')
+        # strategy = get_move(self.level.structure[:-1], self.level.position_player, 'astar2')
+
         # with open("assets/sokobanSolver/Solverlevel_" + str(self.index_level) + ".txt", 'w+') as solver_file:
         #     for listitem in strategy:
         #         solver_file.write('%s, ' % listitem)
